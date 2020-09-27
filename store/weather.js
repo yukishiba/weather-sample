@@ -11,13 +11,13 @@ export const getters = {
   ready (state) {
     return Boolean(state.list.length)
   },
-  areas: (state) => {
+  regions: (state) => {
     return state.list
   },
-  areaIndex: (state) => {
+  regionIndex: (state) => {
     return state.list.length ? state.list.map(obj => obj.id) : []
   },
-  area: state => (id) => {
+  region: state => (id) => {
     return state.list.filter(obj => obj.id === id)[0] || null
   }
 }
@@ -27,8 +27,8 @@ export const mutations = {
     state.list = payload
   },
   setDetail (state, payload) {
-    const areaIndex = state.list.length ? state.list.map(obj => obj.id) : []
-    const index = areaIndex.indexOf(payload.id)
+    const regionIndex = state.list.length ? state.list.map(obj => obj.id) : []
+    const index = regionIndex.indexOf(payload.id)
     if (~index) {
       Vue.set(state.list, index, payload)
     }
@@ -56,7 +56,7 @@ export const actions = {
     }
   },
   async getDetail ({ state, getters, commit, dispatch }, id) {
-    if (!getters.areaIndex.includes(id)) {
+    if (!getters.regionIndex.includes(id)) {
       await dispatch('getList', true)
     }
     try {

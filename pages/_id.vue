@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <h1>{{ area ? area.name : '' }}</h1>
-    <Select :areas="areas" />
-    {{ area }}
+    <h1>{{ region ? region.name : '' }}</h1>
+    <Select :regions="regions" />
+    {{ region }}
   </div>
 </template>
 
@@ -16,14 +16,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      areas: 'weather/areas',
-      areaGetter: 'weather/area'
+      regions: 'weather/regions',
+      regionGetter: 'weather/region'
     }),
-    areaID () {
+    regionID () {
       return this.$route.params.id
     },
-    area () {
-      return this.areaGetter(this.areaID)
+    region () {
+      return this.regionGetter(this.regionID)
     }
   },
   mounted () {
@@ -34,8 +34,8 @@ export default {
       getDetail: 'weather/getDetail'
     }),
     async updateDetails () {
-      await this.getDetail(this.areaID)
-      this.details = this.areaGetter(this.areaID)
+      await this.getDetail(this.regionID)
+      this.details = this.regionGetter(this.regionID)
     }
   }
 }

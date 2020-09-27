@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Select :areas="areas" />
+    <Select :regions="regions" />
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      areas: 'weather/areas'
+      regions: 'weather/regions'
     })
   },
   mounted () {

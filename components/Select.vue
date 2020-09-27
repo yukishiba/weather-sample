@@ -3,10 +3,10 @@
     <p class="title">
       地域を選択
     </p>
-    <select name="area" size="12">
-      <template v-for="area in areas">
-        <option :key="area.id" :value="area.id" @click="selectArea(area.id)">
-          {{ area.name }}
+    <select name="region" size="12">
+      <template v-for="region in regions">
+        <option :key="region.id" :value="region.id" @click="selectregion(region.id)">
+          {{ region.name }}
         </option>
       </template>
     </select>
@@ -16,7 +16,7 @@
 <script>
 export default {
   props: {
-    areas: {
+    regions: {
       type: Array,
       default () {
         return []
@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    selectArea (id) {
+    selectregion (id) {
       this.$router.push(id)
     }
   }
