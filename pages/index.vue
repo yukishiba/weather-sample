@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <Select :regions="regions" />
+  <div class="container index">
+    <SelectArea :regions="regions" />
   </div>
 </template>
 
@@ -22,3 +22,19 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.index {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  /deep/ nav {
+    .region {
+      margin-top: 20px;
+    }
+  }
+}
+</style>

@@ -1,42 +1,89 @@
 <template>
   <div class="container">
-    <h1>{{ region ? region.name : '' }}</h1>
-    <Select :regions="regions" />
-    {{ region }}
+    <header class="header">
+      <h1>{{ region.name || '' }}の天気</h1>
+      <SelectDate :value="dates" :current="dateSelect" @changeDate="changeDate" />
+      <SelectArea :regions="regions" />
+    </header>
+    <div class="areas">
+      <template v-for="area in (region.areas || [])">
+        <AreaDetail :key="area.area" :value="area" :date="dateSelect" />
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
-  data () {
-    return {
-      details: {}
-    }
-  },
   computed: {
     ...mapGetters({
       regions: 'weather/regions',
-      regionGetter: 'weather/region'
+      regionSelect: 'weather/region',
+      dateSelect: 'weather/dateSelect'
     }),
     regionID () {
       return this.$route.params.id
     },
     region () {
-      return this.regionGetter(this.regionID)
+      return this.regionSelect(this.regionID)
+    },
+    dates () {
+      if (this.region && this.region.areas) {
+        const dates = this.region.areas[0].forecast
+        return dates.map(date => date.dateJa)
+      }
+      return []
     }
   },
-  mounted () {
-    this.updateDetails()
+  async mounted () {
+    await this.getDetail(this.regionID)
   },
   methods: {
+    ...mapMutations({
+      setDate: 'weather/setDate'
+    }),
     ...mapActions({
       getDetail: 'weather/getDetail'
     }),
-    async updateDetails () {
-      await this.getDetail(this.regionID)
-      this.details = this.regionGetter(this.regionID)
+    changeDate (date) {
+      this.setDate(Number(date))
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  height: 80px;
+
+  /deep/ nav {
+    display: flex;
+    align-items: center;
+
+    .region {
+      margin-left: 10px;
+    }
+  }
+}
+
+.areas {
+  display: flex;
+  padding: 10px;
+  width: 100%;
+
+  > * {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%;
+    border: 2px solid #eee;
+    margin: 10px;
+    height: auto;
+  }
+}
+</style>

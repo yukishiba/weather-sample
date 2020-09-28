@@ -4,6 +4,11 @@
   </div>
 </template>
 
+<style lang="less">
+@import "~weather-icons/weather-icons/weather-icons.less";
+@weather-icons-path: "/font";
+</style>
+
 <style>
 html {
   font-family:
@@ -34,10 +39,5 @@ html {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 </style>

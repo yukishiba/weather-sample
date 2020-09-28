@@ -4,6 +4,7 @@ import Vue from 'vue'
 export const state = () => ({
   apiRoot: 'https://weather-jp.github.io/jma-weather-api/data/forecast/',
   list: [],
+  dateSelect: 0,
   error: null
 })
 
@@ -18,7 +19,10 @@ export const getters = {
     return state.list.length ? state.list.map(obj => obj.id) : []
   },
   region: state => (id) => {
-    return state.list.filter(obj => obj.id === id)[0] || null
+    return state.list.filter(obj => obj.id === id)[0] || {}
+  },
+  dateSelect: (state) => {
+    return state.dateSelect
   }
 }
 
@@ -32,6 +36,9 @@ export const mutations = {
     if (~index) {
       Vue.set(state.list, index, payload)
     }
+  },
+  setDate (state, payload) {
+    state.dateSelect = payload
   },
   setError (state, error) {
     state.error = error
