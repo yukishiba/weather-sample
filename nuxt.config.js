@@ -47,7 +47,13 @@ export default {
   build: {
   },
 
+  generate: {
+    fallback: false,
+    crawler: false
+  },
+
   router: {
-    mode: 'hash'
+    mode: 'hash',
+    base: '/weather-sample/'
   }
 }
