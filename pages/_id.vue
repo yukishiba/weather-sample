@@ -10,6 +10,9 @@
         <AreaDetail :key="area.area" :value="area" :date="dateSelect" />
       </template>
     </div>
+    <footer>
+      <span class="source">出典：<a href="https://www.jma.go.jp/jp/yoho/" target="_blank">気象庁ホームページ</a></span>
+    </footer>
   </div>
 </template>
 
@@ -84,6 +87,16 @@ export default {
     border: 2px solid #eee;
     margin: 10px;
     height: auto;
+  }
+}
+
+footer {
+  margin: 10px 0;
+  text-align: center;
+
+  .source {
+    font-size: 10px;
+    line-height: 1;
   }
 }
 </style>
