@@ -6,7 +6,6 @@
 
 <style lang="less">
 @import "~weather-icons/weather-icons/weather-icons.less";
-@weather-icons-path: "/font";
 </style>
 
 <style>
